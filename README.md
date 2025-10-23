@@ -1,4 +1,16 @@
-# Welcome to your Expo app 👋
+# Welcome to your Expo Chat app 👋
+
+
+## Authors
+
+- [@EmilianoQuiroz](https://github.com/EmilianoQuiroz/)
+
+
+## Documentation
+
+[Notion](https://www.notion.so/Chat-App-React-Native-Expo-2945fecad6e880468353f71ca73493d2)
+
+## Instalation
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 

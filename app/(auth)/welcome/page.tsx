@@ -2,12 +2,14 @@ import Button from "@/components/Button/Button";
 import ScreenWrapper from "@/components/ScreenWrapper/ScreenWrapper";
 import Typo from "@/components/Typo/Typo";
 import { colors } from "@/constants/theme";
+import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import styles from "./style";
 
-const WelcomePage = () => {
+const Welcome = () => {
+  const router = useRouter();
   return (
     <ScreenWrapper showPattern={true} bgOpacity={0.5}>
       <View style={styles.container}>
@@ -33,7 +35,10 @@ const WelcomePage = () => {
             and family
           </Typo>
         </View>
-        <Button style={{ backgroundColor: colors.white }}>
+        <Button
+          onPress={() => router.push("/(auth)/register/page")}
+          style={{ backgroundColor: colors.white }}
+        >
           <Typo size={23} fontWeight={"bold"}>
             Get started
           </Typo>
@@ -43,4 +48,4 @@ const WelcomePage = () => {
   );
 };
 
-export default WelcomePage;
+export default Welcome;

@@ -18,16 +18,29 @@ import {
   View,
 } from "react-native";
 import styles from "./style";
+import { useAuth } from "@/contexts/authContext";
 
 const Login = () => {
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  const { signIn } = useAuth();
+
   const handleSubmit = async () => {
     if (!emailRef.current || !passwordRef.current) {
       Alert.alert("Please fill in all fields.");
       return;
+    }
+    try {
+      setIsLoading(true);
+      await signIn(emailRef.current, passwordRef.current);
+    } catch (error: any) {
+      console.error("Login error:", error);
+      Alert.alert("An error occurred during login. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 

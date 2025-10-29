@@ -5,13 +5,13 @@ import { StatusBar, StyleSheet, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 
 const SplashScreen = () => {
-  const router = useRouter();
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      router.replace("/(auth)/welcome/page");
-    }, 1500);
-    return () => clearTimeout(timeout);
-  }, []);
+  // const router = useRouter();
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     router.replace("/(auth)/welcome/page");
+  //   }, 1500);
+  //   return () => clearTimeout(timeout);
+  // }, []);
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.neutral900} />

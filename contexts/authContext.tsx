@@ -1,4 +1,5 @@
 import { login, register } from "@/services/authService";
+import { connectSocket, disconnectSocket } from "@/socket/socket";
 import { AuthContextProps, DecodedTokenProps } from "@/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
@@ -38,7 +39,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           gotoWelcomePage();
           return;
         }
+        // user is logged
         setToken(storedToken);
+        await connectSocket();
         setUser(decoded.user);
         goToHomePage();
       } catch (error) {
@@ -76,6 +79,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signIn = async (email: string, password: string) => {
     const response = await login(email, password);
     await updateToken(response.token);
+    await connectSocket();
     router.replace("/(main)/home/page");
   };
 
@@ -88,6 +92,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // Registration logic will go here
     const response = await register(email, password, name, avatar);
     await updateToken(response.token);
+    await connectSocket();
     router.replace("/(main)/home/page");
   };
 
@@ -95,6 +100,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setToken(null);
     setUser(null);
     await AsyncStorage.removeItem("token");
+    disconnectSocket();
     router.replace("/(auth)/welcome/page");
   };
 
